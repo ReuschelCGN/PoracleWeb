@@ -99,9 +99,9 @@
 
                                 // Show Invasions
 
-		                $sql = "SELECT * FROM invasion WHERE id = '" . $_SESSION['id'] . "' and profile_no = '" . $_SESSION['profile'] . "'  
-			                ORDER BY grunt_type";
-				$result = $conn->query($sql); 
+                        $sql = "SELECT * FROM invasion WHERE id = '" . $_SESSION['id'] . "' and profile_no = '" . $_SESSION['profile'] . "'  
+                            ORDER BY grunt_type";
+                $result = $conn->query($sql); 
 
                                 if ($result->num_rows == 0) {
                                    echo "<div class='alert alert-warning w-100 m-3' role='alert'>";
@@ -111,7 +111,7 @@
 
                                 while ($row = $result->fetch_assoc()) {
 
-  			            $grunt_id = get_grunt($row['grunt_type'],$row['gender']);
+                          $grunt_id = get_grunt($row['grunt_type'],$row['gender']);
 
                                     // Build a Unique Index
                                     $unique_id = "invasion_" . $row['uid']; 
@@ -123,26 +123,26 @@
                                     <div class="card-body d-flex flex-column justify-content-between">
                                         <div class="row no-gutters align-items-center">
                                             <div class="col">
-						<div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
-                                                    <?php if ( $row['grunt_type'] == "everything") { ?>
-                                                    <div class="h5 mb-0 mt-2 font-weight-bold text-gray-800 text-center"
-                                                         style="height: 70px;">
-                                                         <font style='font-size:32px;'><?php echo i8ln("ALL"); ?></font>
-						    </div>
-						    <?php } else if ( in_array($row['grunt_type'], $other_grunt_types) ) { 
-						    $grunt_id =array_search($row['grunt_type'], $other_grunt_types); 
-                                                    ?>
-                                                    <img width=50 loading=lazy src='<?php echo $uicons_reward; ?>/pokestop/0_i<?php echo $grunt_id; ?>.png' />
-                                                    <?php } else { ?>
-						    <img width=50 loading=lazy src='<?php echo $uicons_reward; ?>/invasion/<?php echo $grunt_id; ?>.png' />
-                                                    <?php } ?>
-						</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">
+                                <?php if ( $row['grunt_type'] == "everything") { ?>
+                                            <div class="h5 mb-0 mt-2 font-weight-bold text-gray-800 text-center" style="height: 70px;">
+                                                <font style='font-size:32px;'><?php echo i8ln("ALL"); ?></font>
+                                            </div>
+                                <?php } else if ( in_array($row['grunt_type'], $other_grunt_types) ) {
+                                        $grunt_id = array_search($row['grunt_type'], $other_grunt_types); ?>
+                                            <img width=50 loading=lazy src='<?php echo $uicons_reward; ?>/pokestop/0_i<?php echo $grunt_id; ?>.png' />
+                                <?php } elseif ($grunt_id >= "500") { ?>
+                                            <img width=50 loading=lazy src='<?php echo "./grunts/" . $grunt_id . ".png?"; ?>'>
+                                <?php } else { ?>
+                                            <img width=50 loading=lazy src='<?php echo $uicons_reward; ?>/invasion/<?php echo $grunt_id; ?>.png' />
+                                <?php } ?>
+                        </div>
                                                 <?php if ( $row['grunt_type'] <> "everything") { ?>
                                                 <div class="h5 mb-0 font-weight-bold text-gray-800 text-center mt-2">
                                                     <?php echo ucfirst(i8ln(strtolower($row['grunt_type']))); ?>
                                                 </div>
                                                 <?php } ?>
-						<div class="mt-2 text-center">
+                        <div class="mt-2 text-center">
                                                 <ul class="list-group mt-2 mb-2">
                                                     <?php
                                                             if ($row['gender'] <> '0') {
@@ -160,7 +160,7 @@
                                                     <?php } ?>
                                                     <?php if ($row['distance'] <> '0') { ?>
                                                     <li
-							class="list-group-item d-flex justify-content-between align-items-center">
+                            class="list-group-item d-flex justify-content-between align-items-center">
                                                         <?php echo i8ln("DISTANCE"); ?>
                                                         <?php if ( @$distance_map <> "True" ) { ?>
                                                         <span
@@ -172,8 +172,8 @@
                                                             class="badge badge-primary badge-pill"><?php echo $row['distance']; ?>
                                                             <i class="fas fa-map-marked-alt"></i>
                                                         </span>
-							</a>
-							<?php } ?>
+                            </a>
+                            <?php } ?>
                                                     </li>
 
                                                     <?php if ( $row['distance'] > 0 ) { ?>
@@ -187,7 +187,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-						    </div>
+                            </div>
                                                     <?php } ?>
                                                     <?php }
                                                         if ($row['ping'] <> '') {
@@ -206,11 +206,11 @@
                                                        <span class="badge badge-pill badge-info w-100"><?php echo i8ln("Cleaning Activated"); ?></span>
                                                     </div>
 
-						    <?php 
+                            <?php 
                                                             }
                                                     if ( $enable_templates == "True" ) {
                                                     ?>
-						    <div class="mb-2">
+                            <div class="mb-2">
 
                                                     <?php
 
@@ -286,4 +286,3 @@
                     <?php
                     } // End of Invasions Disable
                     ?>
-
