@@ -21,7 +21,7 @@ function get_form_name($pokemon_id, $form_id) {
 
       if ($pokemon['id'] == "$pokemon_id") { 
          if ( $pokemon['form']['id'] == "$form_id" && $pokemon['form']['id'] <> 0) {
-            return $pokemon['form']['name'];
+            return translate_form($pokemon['form']['name']);
          }
       }
    }
@@ -51,7 +51,7 @@ function get_all_forms($pokemon_id) {
 
       if ($pokemon['id'] == "$pokemon_id") {
          if ( $pokemon['form']['id'] <> "0" && !in_array( ucfirst($pokemon['form']['name']), $form_exclude ) ) {
-            $forms[$pokemon['form']['id']] = $pokemon['form']['name'];
+            $forms[$pokemon['form']['id']] = translate_form($pokemon['form']['name']);
          }
       }
    }
@@ -156,6 +156,27 @@ function translate_mon($word)
 
     if (isset($localePkmnData[$word])) {
         return $localePkmnData[$word];
+    } else {
+        return $word;
+    }
+}
+
+function translate_form($word)
+{
+    $locale = @$_SESSION['locale'];
+    if ($locale == "en") {
+        return $word; exit();
+    }
+
+    global $localeFormsData;
+    global $localeFormsData_json;
+
+    if ($localeFormsData == null) {
+        $localeFormsData = json_decode($localeFormsData_json, true);
+    }
+
+    if (isset($localeFormsData[$word])) {
+        return $localeFormsData[$word]; 
     } else {
         return $word;
     }
