@@ -11,15 +11,18 @@
 	  $_SESSION['profile'] = $_POST['profile'];
   }
 
-  if ( isset($_POST['activate']) ) { 
+  if ( isset($_POST['activate']) ) {
 
-	  $sql = "SELECT area, latitude, longitude from profiles WHERE id = '" . $_SESSION['id'] . "' AND profile_no = '".$_POST['profile']."'";
-          $result = $conn->query($sql); 
-	  while ($row = $result->fetch_assoc()) { 
-		  $area = $row['area']; 
-		  $latitude = $row['latitude']; 
-		  $longitude = $row['longitude']; 
+	  $stmt = $conn->prepare("SELECT area, latitude, longitude from profiles WHERE id = ? AND profile_no = ?");
+	  $stmt->bind_param("si", $_SESSION['id'], $_POST['profile']);
+	  $stmt->execute();
+	  $result = $stmt->get_result();
+	  while ($row = $result->fetch_assoc()) {
+		  $area = $row['area'];
+		  $latitude = $row['latitude'];
+		  $longitude = $row['longitude'];
 	  }
+	  $stmt->close();
 
 	  $sql = "UPDATE humans 
 		  SET area = '".$area."', 
