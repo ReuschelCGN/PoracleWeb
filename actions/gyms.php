@@ -116,15 +116,16 @@
 
     foreach ($_POST as $key => $value) {
       if (substr($key, 0, 4) === "gym_") {
-        $team = substr($key, 4); 
+        $team = substr($key, 4);
+        $gym_id = ($_POST['gym_id'] != 'ALL') ? $_POST['gym_id'] : NULL;
 
-        $stmt = $conn->prepare("INSERT INTO gym ( id, ping, clean, distance, template, team, slot_changes, battle_changes, profile_no)
-	                       VALUES ( ?, ?, ? , ?, ?, ?, ?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO gym ( id, ping, clean, distance, template, team, slot_changes, battle_changes, profile_no, gym_id)
+                           VALUES ( ?, ?, ? , ?, ?, ?, ?, ?, ?, ?)");
         if (false === $stmt) {
           header("Location: $redirect_url?type=display&page=gym&return=sql_error&phase=AG1&sql=$stmt->error");
           exit();
         }
-        $rs = $stmt->bind_param("ssiisiiii", $_SESSION['id'], $_POST['content'], $clean, $_POST['distance'], $template, $team, $slots, $battle, $_SESSION['profile']);
+        $rs = $stmt->bind_param("ssiisiiii", $_SESSION['id'], $_POST['content'], $clean, $_POST['distance'], $template, $team, $slots, $battle, $_SESSION['profile'], $gym_id);
         if (false === $rs) {
           header("Location: $redirect_url?type=display&page=gym&return=sql_error&phase=AG2&sql=$stmt->error");
           exit();
