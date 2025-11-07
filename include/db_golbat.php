@@ -149,4 +149,3 @@ function get_gym_url($id) {
         return $gym_url;
 
 }
-
