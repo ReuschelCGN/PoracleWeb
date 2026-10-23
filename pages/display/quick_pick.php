@@ -1,4 +1,3 @@
-
 <?php
 
    $sql = "SELECT min(clean) clean FROM monsters WHERE id = ? AND profile_no = ?";
@@ -32,14 +31,14 @@
                     <?php if ($_SESSION['everythingFlagPermissions'] <> "deny" || strpos($_SESSION['type'], ":user") == false ) { ?>
 
                     <!-- QUICK PIC Card -->
-		    <div class="col-xl-12 col-sm-12 col-12">
+            <div class="col-xl-12 col-sm-12 col-12">
 
                         <div class="mb-3">
                             <center>
-			    <?php echo i8ln("Click the <i class='fas fa-plus'></i> button to quickly add a tracking").".<br>"; ?>
-			    <?php echo i8ln("Already tracked are shown in green")."."; ?>
+                <?php echo i8ln("Click the <i class='fas fa-plus'></i> button to quickly add a tracking").".<br>"; ?>
+                <?php echo i8ln("Already tracked are shown in green")."."; ?>
                             </center>
-		        </div>
+                </div>
 
                         <div class="card shadow mb-4">
 
@@ -58,37 +57,37 @@
                                    $stmt->bind_param("si", $_SESSION['id'], $_SESSION['profile']);
                                    $stmt->execute();
                                    $result = $stmt->get_result();
-				   if ( $result->num_rows > 0 ) { $found = 1; $style = "background:#1cc88a; color:white;"; } else { $found = ""; $style = ""; }
+                   if ( $result->num_rows > 0 ) { $found = 1; $style = "background:#1cc88a; color:white;"; } else { $found = ""; $style = ""; }
 
                                    while ($row = $result->fetch_assoc()) {
-					   $uid = $row['uid'];
+                       $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
 
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
                                 <div class="input-group mt-2 justify-content-center">
-				   <div class="input-group-text mr-1 justify-content-center" style="width:80%; <?php echo $style; ?>"><?php echo i8ln("100% IV Pokemon"); ?></div>
+                   <div class="input-group-text mr-1 justify-content-center" style="width:80%; <?php echo $style; ?>"><?php echo i8ln("100% IV Pokemon"); ?></div>
                                    <input type='hidden' id='clean' name='clean' value='<?php echo $mon_cleaned; ?>'>
                                    <input type='hidden' id='distance' name='distance' value='<?php echo $mon_distance; ?>'>
                                    <input type='hidden' id='pick' name='pick' value='<?php echo i8ln("100% IV Pokemon"); ?>'>
                                    <input type='hidden' id='pokemon_id' name='pokemon_id' value='0'>
-				   <input type='hidden' id='min_iv' name='min_iv' value='100'>
+                   <input type='hidden' id='min_iv' name='min_iv' value='100'>
                                    <?php if ( $found == 1 ) { ?>
-				   <input type='hidden' id='action' name='action' value='delete'>
-				   <input type='hidden' id='uid' name='uid' value='<?php echo $uid; ?>'>
-				   <button type='submit' class="btn btn-danger btn-icon-split ml-1">
+                   <input type='hidden' id='action' name='action' value='delete'>
+                   <input type='hidden' id='uid' name='uid' value='<?php echo $uid; ?>'>
+                   <button type='submit' class="btn btn-danger btn-icon-split ml-1">
                                       <span class="icon text-white-100"><i class="fas fa-trash"></i></span>
                                       <span class="text d-none d-lg-block" style="width:120px;"><?php echo i8ln("DELETE"); ?></span>
                                    </button>
-				   <?php } else { ?>
-				   <input type='hidden' id='action' name='action' value='add'>
-				   <button type='submit' class="btn btn-success btn-icon-split ml-1">
+                   <?php } else { ?>
+                   <input type='hidden' id='action' name='action' value='add'>
+                   <button type='submit' class="btn btn-success btn-icon-split ml-1">
                                       <span class="icon text-white-100"><i class="fas fa-plus"></i></span>
                                       <span class="text d-none d-lg-block" style="width:120px;"><?php echo i8ln("ADD"); ?></span>
                                    </button>
-				   <?php } ?>
+                   <?php } ?>
                                 </div>
                                 </form>
 
@@ -104,7 +103,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
 
                                 ?>
 
@@ -145,7 +144,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
@@ -171,7 +170,7 @@
                                       <span class="text d-none d-lg-block" style="width:120px;"><?php echo i8ln("ADD"); ?></span>
                                    </button>
                                    <?php } ?>
-				</div>
+                </div>
                                 </form>
 
                                 <?php
@@ -185,7 +184,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
@@ -225,7 +224,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
@@ -260,10 +259,8 @@
                             </div>
 
                         </div>
-		    </div>
+            </div>
                     <?php } ?>
-
-                    <!-- QUICK PIC Card -->
 
                     <div class="col-xl-12 col-sm-12 col-12">
 
@@ -288,7 +285,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
@@ -297,8 +294,8 @@
                                    <div class="input-group-prepend">
                                        <div class="input-group-text"><?php echo i8ln("IV Min"); ?></div>
                                    </div>
-				   <input type='hidden' id='clean' name='clean' value='<?php echo $mon_cleaned; ?>'>
-				   <input type='hidden' id='distance' name='distance' value='<?php echo $mon_distance; ?>'>
+                   <input type='hidden' id='clean' name='clean' value='<?php echo $mon_cleaned; ?>'>
+                   <input type='hidden' id='distance' name='distance' value='<?php echo $mon_distance; ?>'>
                                    <input type='hidden' id='pick' name='pick' value='<?php echo i8ln("XXS Pokemon"); ?>'>
                                    <input type='hidden' id='pokemon_id' name='pokemon_id' value='0'>
                                    <input type='hidden' id='size' name='size' value='1'>
@@ -318,7 +315,7 @@
                                       <span class="text d-none d-lg-block" style="width:120px;"><?php echo i8ln("ADD"); ?></span>
                                    </button>
                                    <?php } ?>
-			        </div>
+                    </div>
                                 </form>
 
                                 <?php
@@ -332,7 +329,7 @@
                                    while ($row = $result->fetch_assoc()) {
                                            $uid = $row['uid'];
                                    }
-				   $stmt->close();
+                   $stmt->close();
                                 ?>
 
                                 <form action='./actions/quick_pick.php' method='POST' class="w-100">
@@ -341,8 +338,8 @@
                                    <div class="input-group-prepend">
                                        <div class="input-group-text"><?php echo i8ln("IV Min"); ?></div>
                                    </div>
-				   <input type='hidden' id='clean' name='clean' value='<?php echo $mon_cleaned; ?>'>
-				   <input type='hidden' id='distance' name='distance' value='<?php echo $mon_distance; ?>'>
+                   <input type='hidden' id='clean' name='clean' value='<?php echo $mon_cleaned; ?>'>
+                   <input type='hidden' id='distance' name='distance' value='<?php echo $mon_distance; ?>'>
                                    <input type='hidden' id='pick' name='pick' value='<?php echo i8ln("XXL Pokemon"); ?>'>
                                    <input type='hidden' id='pokemon_id' name='pokemon_id' value='0'>
                                    <input type='hidden' id='size' name='size' value='5'>
@@ -361,15 +358,15 @@
                                       <span class="text d-none d-lg-block" style="width:120px;"><?php echo i8ln("ADD"); ?></span>
                                    </button>
                                    <?php } ?>
-			        </div>
+                    </div>
                                 </form>
 
-				</div>
+                </div>
 
-			    </div>
+                </div>
 
-			</div>
+            </div>
 
-		    </div>
+            </div>
 
                 </div>

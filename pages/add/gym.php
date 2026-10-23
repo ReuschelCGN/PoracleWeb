@@ -21,6 +21,35 @@ if ( $disable_gyms == "True" ) {
                         <?php $default_distance = default_distance('gym'); ?>
 			<?php include "./include/add_area_distance.php"; ?>
 
+                        <!--  Gym Picker -->
+                        <div class="form-row align-items-center">
+                            <div class="col-sm-12 my-1">
+
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><?php echo i8ln("Gym"); ?></div>
+				    </div>
+
+				    <select class="form-control selectpicker" data-toggle="dropdown" id="gym_id" name="gym_id" data-live-search="true" data-width="100px">
+
+				       <option value="ALL" data-tokens="ALL"><?php echo i8ln("TRACK FOR ALL GYMS"); ?></option>
+
+                                       <?php
+ 				           $gymlist = get_gym_list();
+                                           foreach ($gymlist as $key => $gym) {
+                                              $arr = explode("_", $gym);
+                                              $gym_id = $arr[0];
+                                              $gym_name = str_replace("'", " ", $arr[1]);
+					      echo '<option data-tokens="'.$gym_id.'" value="'.$gym_id.'">'.substr($gym_name,0,45).'</option>';
+					   }
+
+	                               ?>
+                               
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
 			<div class="form-row align-items-center">
 							<?php if (strpos($_SESSION['type'], ':user') === false) {  ?>
                             <div class="col-sm-12 my-1">
@@ -141,14 +170,25 @@ if ( $disable_gyms == "True" ) {
                         <div class='selectionList'>
                             <ul>
                                 <?php
-                                    $team_list = "0,1,2,3";
+                                    $team_list = "0,1,2,3,4";
                                     $teams = explode(',', $team_list);
                                     foreach ($teams as &$team) {
                                     ?>
                                 <li class='text-center'><input type='checkbox' name='gym_<?php echo $team; ?>'
                                         id='gym_<?php echo $team; ?>' />
                                     <label for='gym_<?php echo $team; ?>'>
-                                        <img class='m-2' src='<?php echo "$uicons_gym/gym/" . $team . ".png?"; ?>' />
+
+
+                                    <?php if ( $team == "4") { ?>
+                                                       <img width=50 loading=lazy src='<?php echo "$uicons_gym/gym/0.png?"; ?>'>
+                                                       <img width=50 loading=lazy style='margin-left:-45px;' src='<?php echo "$uicons_gym/gym/1.png?"; ?>'>
+                                                       <img width=50 loading=lazy style='margin-left:-45px;' src='<?php echo "$uicons_gym/gym/2.png?"; ?>'>
+                                                       <img width=50 loading=lazy style='margin-left:-45px;' src='<?php echo "$uicons_gym/gym/3.png?"; ?>'>
+                                    <?php } else { ?>
+                                        <img width=50 loading=lazy src='<?php echo "$uicons_gym/gym/" . $team . ".png?"; ?>'>
+                                     <?php } ?>
+
+
 					<br><?php echo i8ln(get_gym_name($team)); ?>
                                     </label>
                                 </li>

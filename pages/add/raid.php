@@ -257,7 +257,7 @@ if ( $disable_raids == "True" ) {
                                         <?php 
                                              $form_name = get_form_name($boss_id, $boss_form);
                                              if ( $form_name == "Normal" ) { $form_name = ""; }
-					     echo $pokemon_name." ".$form_name; 
+					     echo $pokemon_name." ".i8ln($form_name);
 					     echo "<br>".$mega_name;
                                         ?>
                                     </label>

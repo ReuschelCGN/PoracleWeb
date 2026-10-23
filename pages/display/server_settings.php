@@ -238,6 +238,11 @@ if (!isset($_SESSION['admin_id'])) {
                                             <?php if ($scan_dbtype == "RDM") { echo "checked"; }  ?>>
                                         <?php echo i8ln("RDM"); ?>
                                     </label>
+                                    <label class="btn btn-secondary">
+                                        <input type="radio" name="scan_dbtype" id="scan_dbtype" value="GOLBAT"
+                                            <?php if ($scan_dbtype == "GOLBAT") { echo "checked"; }  ?>>
+                                        <?php echo i8ln("GOLBAT"); ?>
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-sm-12 my-1">

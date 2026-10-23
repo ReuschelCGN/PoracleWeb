@@ -10,6 +10,9 @@ if (isset($scan_dbtype) && $scan_dbtype == "MAD") {
 if (isset($scan_dbtype) && $scan_dbtype == "RDM") {
     include_once "./include/db_rdm.php";
 }
+if (isset($scan_dbtype) && $scan_dbtype == "GOLBAT") {
+    include_once "./include/db_golbat.php";
+}
 
 
 $mons=get_all_mons();
