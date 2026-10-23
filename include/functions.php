@@ -59,7 +59,24 @@ function get_all_forms($pokemon_id) {
 }
 
 function stripAccents($str) {
-    return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+    return strtr($str, [
+    'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+    'ç'=>'c',
+    'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e',
+    'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i',
+    'ñ'=>'n',
+    'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o',
+    'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u',
+    'ý'=>'y', 'ÿ'=>'y',
+    'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+    'Ç'=>'C',
+    'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E',
+    'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I',
+    'Ñ'=>'N',
+    'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O',
+    'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U',
+    'Ý'=>'Y'
+]);
 }
 
 function get_all_mons() {
@@ -586,7 +603,7 @@ function default_distance($table) {
       include_once "./include/db_connect.php";
       // Table names cannot be parameterized in prepared statements (they are identifiers, not values)
       // so we use a whitelist to validate the table name before using string interpolation
-      $allowed_tables = array('monsters', 'raid', 'egg', 'quest', 'invasion', 'lures', 'nests', 'gym');
+      $allowed_tables = array('monsters', 'raid', 'egg', 'quest', 'invasion', 'lures', 'gym','nests');
       if (!in_array($table, $allowed_tables)) { die("Invalid table"); }
       $sql = "SELECT distance, count(*) FROM $table WHERE id = ? GROUP BY distance ORDER BY count(*) DESC LIMIT 1";
       $stmt = $conn->prepare($sql);
